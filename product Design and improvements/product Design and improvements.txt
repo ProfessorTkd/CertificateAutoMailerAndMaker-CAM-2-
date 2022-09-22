@@ -16,8 +16,3 @@ Further Improvements
 --> global count variable to maintain (in a file) excel list count till which certificate emails are done so that script runs for only new entries.
 --> Coding practices improvements
 --> UX oriented html email template for email body
-
-
-
-
-
