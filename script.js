@@ -1,12 +1,5 @@
 // Welcome Tapish Rawat Here
-// npm install pdf-lib
-// npm install xlsx
-// npm install nodemailer
-// node mainDEMO.js 
-// instead of main.js uploading mainDemo.js difference is Credentials
-// npm install googleapis --save
-// npm install googleapis
-// npm install
+// node script.js 
 let pdf = require("pdf-lib");
 let xlsx = require("xlsx");
 let fs = require("fs");
@@ -20,10 +13,10 @@ const REFRESH_TOKEN = 'Your REFRESH_TOKEN';
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-// READING EXCEL DATA GATHER VIA GOOGLE FORM
+// READING EXCEL DATA
 let dataXlsx = xlsx.readFile("data.xlsx");
 let dataSheet = dataXlsx.Sheets['Form Responses 1'];
-let data = xlsx.utils.sheet_to_json(dataSheet);
+let d = xlsx.utils.sheet_to_json(dataSheet);
 
 // READING DATE, SUBJECT AND CONTENT FOR CERTIFICATE
 let date = "21 September 2022";
@@ -31,8 +24,8 @@ let subject = fs.readFileSync('subject.txt', 'utf-8');
 let body = fs.readFileSync('body.txt', 'utf-8');    
 
 
-for(let i = 0; i< data.length; i++){
-    let name = data[i].Name;
+for(let i = 0; i< d.length; i++){
+    let name = d[i].Name;
     // CREATING & STORING CERTIFICATE
     createCertificate(name,date);
 
@@ -83,7 +76,7 @@ async function sendMail(subject,body, name, userEmail, certiPath) {
             service: 'gmail',
             auth: {
                 type: 'OAuth2',
-                user: 'iamtapishrawat@gmail.com',
+                user: 'abc@gmail.com',
                 clientId: CLIENT_ID,
                 clientSecret: CLIENT_SECRET,
                 refreshToken: REFRESH_TOKEN,
@@ -92,8 +85,8 @@ async function sendMail(subject,body, name, userEmail, certiPath) {
         })
 
         let mailOptions = {
-            from: 'Tapish Rawat <iamtapishrawat@gmail.com>',
-            to: 'irawattapish@gmail.com',
+            from: 'ABC <abc@gmail.com>',
+            to: 'abc@gmail.com',
             subject: subject,
             html: "Dear "+name+"\n"+body,
             attachments: [{
